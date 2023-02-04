@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import * as THREE from "three";
 
-import land from '../../geo/th_land.json'
-import { useTHLandMaterial } from "./THLandShader";
+import land from '../../../geo/th_land.json'
+import { useTHLandMaterial } from "./../shaders/THLandShader";
 
 function LandModel() {
     const landRef = useRef();
