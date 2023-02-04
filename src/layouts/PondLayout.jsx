@@ -3,6 +3,12 @@ import { useRef } from "react";
 import * as THREE from "three"
 import { useLocation } from "wouter";
 
+import LandModel from "./LandModel";
+import TreeModel from "./TreeModel";
+import WaterModel from "./WaterModel";
+import LeavesModel from "./LeavesModel";
+import GrassModel from "./GrassModel";
+
 function PondLayout() {
     const cubeRef = useRef();
     const [, setLocation] = useLocation()
@@ -19,7 +25,7 @@ function PondLayout() {
         <group 
             position={[0, 0, 0]}> 
 
-            <mesh
+            {/* <mesh
                 ref={cubeRef}
                 onClick={(e) => {
                     // console.log('clicked')
@@ -28,7 +34,13 @@ function PondLayout() {
                 }}
                 material={material}
                 geometry={geometry}>
-            </mesh>
+            </mesh> */}
+            <LandModel />
+            <TreeModel />
+            <WaterModel />
+            <LeavesModel />
+            <GrassModel />
+            
         </group> 
     );
 }

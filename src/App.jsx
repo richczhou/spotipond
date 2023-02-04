@@ -7,7 +7,7 @@ import { useLocation, Switch, Route } from "wouter"
 import './App.css'
 import LoginPage from './scenes/LoginPage';
 import MainPage from './scenes/MainPage';
-import TestLayout from './layouts/test/TestLayout';
+import PondLayout from './layouts/PondLayout';
 
 function App() {
   const [location] = useLocation()
@@ -21,7 +21,7 @@ function App() {
 
         {/* KIMBO COMMENT OUT EVERYTHING BELOW */}
         <Canvas className="main-canvas" camera={{fov: 50, position:[-0.5, 1.5, 1.5]}} >
-          <TestLayout />
+          <PondLayout />
         </Canvas>
     </div>
   )
