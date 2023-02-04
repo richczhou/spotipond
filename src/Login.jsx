@@ -1,7 +1,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import './App.css'
 import './Login.css'
-import axios from 'axios'
+// import axios from 'axios'
 
 
 window.danceability = 0.5;
@@ -64,9 +64,9 @@ function Login() {
     }
 
     function renderSongs () {
-        // console.log(songs)
-        if (songs.length < 1) getSongs();
-        getSongs()
+        console.log(songs, songs.length)
+        if (!songs.length) getSongs();
+        // getSongs()
         return songs.map(s => (
             <div key={s.title}>
                 {s.title} - {s.artist}
@@ -83,8 +83,8 @@ function Login() {
 
                 {token ?
                     <>
-                    { renderSongs() }
                     <p>these are the user's recommended songs</p>
+                    { renderSongs() }
                     </>
                     : <h2>pls login</h2>
                 }      
