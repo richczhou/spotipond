@@ -121,7 +121,7 @@ const vert = `
 
     void main() {
         vec3 pos = position;
-        pos *= 0.12;
+        // pos *= 0.12;
         vNormal = normalize(normalMatrix * normal);
 
         vData = vdata;

@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { useLocation } from "wouter";
 import * as THREE from "three";
 
 import rarefish from '../../../geo/th_fish_rare.json'
@@ -8,11 +9,34 @@ function RareFishModel() {
     const rarefishRef = useRef();
     const rarefishMat = useRareFishMaterial(new THREE.Color('#FF0000'));
 
+    function onOver() {
+        // console.log(rarefishRef.current)
+        rarefishRef.current.scale.x = 0.24;
+        rarefishRef.current.scale.y = 0.24;
+        rarefishRef.current.scale.z = 0.24;
+    }
+
+    function onOut() {
+        rarefishRef.current.scale.x = 0.18;
+        rarefishRef.current.scale.y = 0.18;
+        rarefishRef.current.scale.z = 0.18;
+    }
+
+    function onClick() {
+        setLocation('/main');
+    }
+
+    const [, setLocation] = useLocation();
+
     return (
         <mesh
             ref={rarefishRef}
             material={rarefishMat}
-            position={[0, 0, 0]}>
+            onPointerOver={onOver}
+            onPointerOut={onOut}
+            onClick={onClick}
+            scale={0.18}
+            position={[0.2, 0, 0]}>
             <bufferGeometry attach="geometry">
                 <bufferAttribute
                     attach='attributes-position'

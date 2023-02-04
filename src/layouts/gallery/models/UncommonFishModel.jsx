@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { useLocation } from "wouter";
 import * as THREE from "three";
 
 import uncommonfish from '../../../geo/th_fish_dancing.json'
@@ -8,10 +9,32 @@ function UncommonFishModel() {
     const uncommonfishRef = useRef();
     const uncommonfishMat = useUncommonFishMaterial(new THREE.Color('#FF0000'));
 
+    function onOver() {
+        // console.log(commonfishRef.current)
+        uncommonfishRef.current.scale.x = 0.16;
+        uncommonfishRef.current.scale.y = 0.16;
+        uncommonfishRef.current.scale.z = 0.16;
+    }
+
+    function onOut() {
+        uncommonfishRef.current.scale.x = 0.12;
+        uncommonfishRef.current.scale.y = 0.12;
+        uncommonfishRef.current.scale.z = 0.12;
+    }
+
+    function onClick() {
+        setLocation('/main');
+    }
+
+    const [, setLocation] = useLocation();
     return (
         <mesh
             ref={uncommonfishRef}
             material={uncommonfishMat}
+            onPointerOver={onOver}
+            onPointerOut={onOut}
+            onClick={onClick}
+            scale={0.12}
             position={[0, 0, 0]}>
             <bufferGeometry attach="geometry">
                 <bufferAttribute

@@ -9,9 +9,9 @@ function GalleryOverlay() {
             }}>
                 What type of experience are you looking for?
             </h2>
-            <button className="spotify-button">
+            {/* <button className="spotify-button">
                 get some gallery
-            </button>
+            </button> */}
         </div>
     </div>
     )
