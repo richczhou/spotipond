@@ -9,8 +9,9 @@ const spotify = {
     privSongToken: 'BQDhNwNaSp_Usd3xZWFBH0XePagt_1RKEtFHqS11PUpfSCxipC9y5B9c0nteYJm1rKiwzd6aUBDHXZQYy49HT_66wKsDnNg7ed01Bbb02J1LTq_CcpWGeJA9OGzPcH7OiNfpAP39YHcxCiE8dqhvS1vi8H-EmyGBITQjSMaAcxF0',
     privPlaylistToken: 'BQBvGHyEO6ltYa4p2B0gjW5xMnwdL5KYbAcJgBCPPKPG344p0PcdmdludF4FwmmuzjJiJvqdSa-Um1ZQyigxxZr-8Mg03M3ZvJWQTFndiVHY_5q61nToyDWjEtyAu4xucdfwcElA5w6wycHeUTnKoMYtVAAtOU4Iz8bXHPlaogJoV5NHaWehvi3l9Pd36Vz64CUetCs8Jz2RaiU-vs34RPs6qktTHsDbcaWtvsvQ8A',
     clientId: 'a56551db3f5d4df7b05e7efa31394e98',
-    redirectUrl: 'http://localhost:5173/callback',
-
+    redirectUrl: 'http://localhost:5173/gallery',
+    AUTH_ENDPOINT: 'https://accounts.spotify.com/authorize',
+    RESPONSE_TYPE: 'token'
 }
 
 /* props

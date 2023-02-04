@@ -14,7 +14,7 @@ function LoginOverlay() {
             }}>
                 SpotiPond
             </h1>
-            <button className="spotify-button">
+            <button className="spotify-button" onClick={onClick}>
                 Dive into your new taste
             </button>
         </div>
