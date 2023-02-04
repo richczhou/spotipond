@@ -14,6 +14,8 @@ function GalleryLayout() {
 
     return (
         <group 
+            onPointerOver={() => {material.color.set('red')}}
+            onPointerOut={() => {material.color.set('green')}}
             position={[0, 0.05, 0]}
             ref={groupRef}> 
 

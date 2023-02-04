@@ -17,8 +17,8 @@ function App() {
     <div className="App">
         <Switch location={location}>
           <Route path="/" component={LoginPage} />
-          <Route path="/login" component={MainPage} />
           <Route path="/gallery" component={GalleryPage} />
+          <Route path="/main" component={MainPage} />
         </Switch>
 
         {/* KIMBO COMMENT OUT EVERYTHING BELOW */}
