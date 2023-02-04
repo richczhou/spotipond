@@ -2,6 +2,12 @@ import { useFrame } from "@react-three/fiber";
 import { useRef } from "react";
 import * as THREE from "three"
 
+import CommonFishModel from "./gallery/models/CommonFishModel";
+import UncommonFishModel from "./gallery/models/UncommonFishModel";
+import RareFishModel from "./gallery/models/RareFishModel";
+import SphereModel from "./pond/models/SphereModel";
+import FloorModel from "./gallery/models/FloorModel";
+
 function GalleryLayout() {
     const groupRef = useRef();
     const material = new THREE.MeshBasicMaterial({ color: "green" });
@@ -19,21 +25,12 @@ function GalleryLayout() {
             position={[0, 0.05, 0]}
             ref={groupRef}> 
 
-            <mesh
-                material={material}
-                geometry={geometry}
-                position={[0, 0, 0]}>
-            </mesh>
-            <mesh
-                material={material}
-                geometry={geometry}
-                position={[0.2, 0, 0]}>
-            </mesh>
-            <mesh
-                material={material}
-                geometry={geometry}
-                position={[-0.2, 0, 0]}>
-            </mesh>
+            <CommonFishModel />
+            <UncommonFishModel />
+            <RareFishModel />
+            <SphereModel />
+            <FloorModel />
+
         </group>
     );
 }
