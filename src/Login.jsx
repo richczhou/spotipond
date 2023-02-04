@@ -8,9 +8,9 @@ window.speechiness = 0.5;
 window.tempo = 90.0;
 window.valence = 0.5;
 window.fresh = true; // false if you want all songs, true if you want only 10
-window.privUserToken = 'BQBN5ymllI0ouzfvz245xbBCiFGksybYhFDIGG5vdGJqJZA8dHFa-ylajxcvdgToYbVzYGkR5J1WNzveh09e1kYzlpTSMj92hV5BRHO06trHkB63aIc6oOPXG15_n2NVdZ8WEGTnnCHRCxcUottzWGsEWs3lavXp4upJ3auz3XZWszsBYz8GQjsqnBdxtA';
-window.privSongToken = 'BQCrTfDH6GjVN0tL8KWLjzwl8FuOsw--h-FjLop7VzuvIV1kldIotmIKkSetWeeQXocx3krnjnRWpA37_tDv17p3y1F-YZNPd-9fJDFViBHIJaBtHWdrOexk-1qsRMqQ1JsgLZhP7pXEs56RL1UKx31W2omuZJSdTIGBzO6xVmyzvw'
-window.privPlaylistToken = 'BQA7xkU1wejStky_43i4Kz0XsqdRzfJm0BGxEoQRrA4aSjxAz7M8S_sx7C9jpkxadUs8BDKTwlpYi4ZI7BBEEZ-mxq3pWZvK3671KwF7meij0VRiw_EOxdOumreu72aR9O5bHJy1kdgSywXN_KzUY9LYkLIOYTVsQeym67vYy8zWjRtr2_Cqkl3C2BJPPEvnX_WmBTmoMmVQP2nn7wZgXtLx_AYhFZ92A5SNYxULJWA';
+window.privUserToken = 'BQBiN_QGKp5KL9a0RTobeT8nMgaZr9ZeM_C0Lv3XF0DqNKiZrDrdRoJKbBrf3zsFCnX0KIjLRn8JXICQf6zEQvDdjph4yYRJtbPqbHWAd22rOEvvoPm_ZKelTU5uHZVCpWHu5iXg8cYk3T0Jlek--IGMhpe-HwnJkVhzKy8jD1kucLzEyobOouagN263';
+window.privSongToken = 'BQDhNwNaSp_Usd3xZWFBH0XePagt_1RKEtFHqS11PUpfSCxipC9y5B9c0nteYJm1rKiwzd6aUBDHXZQYy49HT_66wKsDnNg7ed01Bbb02J1LTq_CcpWGeJA9OGzPcH7OiNfpAP39YHcxCiE8dqhvS1vi8H-EmyGBITQjSMaAcxF0';
+window.privPlaylistToken = 'BQBvGHyEO6ltYa4p2B0gjW5xMnwdL5KYbAcJgBCPPKPG344p0PcdmdludF4FwmmuzjJiJvqdSa-Um1ZQyigxxZr-8Mg03M3ZvJWQTFndiVHY_5q61nToyDWjEtyAu4xucdfwcElA5w6wycHeUTnKoMYtVAAtOU4Iz8bXHPlaogJoV5NHaWehvi3l9Pd36Vz64CUetCs8Jz2RaiU-vs34RPs6qktTHsDbcaWtvsvQ8A';
 
 function Login() {
     const CLIENT_ID = "a56551db3f5d4df7b05e7efa31394e98"
@@ -142,8 +142,8 @@ function Login() {
                 {token ? 
                     window.fresh ?
                         <>
-                            <button onClick={logout}>logout</button>
-                            <p>fresh finds (10 songs)</p>
+                            <button onClick={logout}>Logout</button>
+                            <p>Fresh Finds (10 songs)</p>
                             { renderSongs(10) }
                             <iframe
                                 src={iframeSrc}
@@ -157,8 +157,8 @@ function Login() {
                         </>
                         :
                         <>
-                            <button onClick={logout}>logout</button>
-                            <p>rotten finds (70 songs)</p>
+                            <button onClick={logout}>Logout</button>
+                            <p>Rotten Finds (70 songs)</p>
                             { renderSongs(70) }
                             <iframe
                                 src={iframeSrc}
@@ -172,8 +172,8 @@ function Login() {
                         </>
                     : 
                     <>
-                        <h2>pls login</h2>
-                        <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>login</a>
+                        <h2>Please login to enable experience</h2>
+                        <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login</a>
                     </>
                 }
         </div>

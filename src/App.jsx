@@ -6,6 +6,7 @@ import { useLocation, Switch, Route } from "wouter"
 
 import './App.css'
 import LoginPage from './scenes/LoginPage';
+import Login from './Login';
 import GalleryPage from './scenes/GalleryPage';
 import MainPage from './scenes/MainPage';
 import PondLayout from './layouts/PondLayout';
@@ -17,6 +18,7 @@ function App() {
     <div className="App">
         <Switch location={location}>
           <Route path="/" component={LoginPage} />
+          <Route path="/callback" component={Login} />
           <Route path="/gallery" component={GalleryPage} />
           <Route path="/main" component={MainPage} />
         </Switch>
