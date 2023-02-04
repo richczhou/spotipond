@@ -100,11 +100,12 @@ function MainOverlay() {
     }
     
     if (songs.length >= 10) {
-        createPlaylist()
+        // createPlaylist()
     }
     
-    const iframeSrc = "https://open.spotify.com/embed/playlist/" + playlistId.current + "?utm_source=generator"
-
+    // const iframeSrc = "https://open.spotify.com/embed/playlist/" + playlistId.current + "?utm_source=generator";
+    const iframeSrc = "https://open.spotify.com/embed/playlist/5OHAlIRtavyClwEDV8cEp9?utm_source=generator";
+    
     function pullUp() {
         if (!isReady || playlistRef.current.style.top == '15%') return;
         setReady(false);
