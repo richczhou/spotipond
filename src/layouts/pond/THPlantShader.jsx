@@ -3,13 +3,13 @@ import * as THREE from "three"
 import { useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 
-export const useTHBushMaterial = ( color ) => {
+export const useTHPlantMaterial = ( color ) => {
   const mat = useMemo(
     () =>
       new ShaderMaterial({
         uniforms: {
           tMap: new Uniform(new THREE.TextureLoader().load( "tex/th_land.jpg" )),
-          tOp: new Uniform(new THREE.TextureLoader().load( "tex/st_grass.jpg" )),
+          tOp: new Uniform(new THREE.TextureLoader().load( "tex/st_grassplant.jpg" )),
           uTime: new Uniform(0)
         },
         vertexShader: vert,
@@ -18,8 +18,8 @@ export const useTHBushMaterial = ( color ) => {
     [color]
   );
 
-  mat.transparent = true;
   mat.side = THREE.DoubleSide;
+  mat.transparent = true;
 
   useFrame(({ clock }) => {
     //mat.uniforms.uColor.value = color;
@@ -119,9 +119,9 @@ const vert = `
         vNormal = normalize(normalMatrix * normal);
     
     
-        float rotation = radians((360.0) + crange(sin(uTime + pos.x*2.3+ vdata.r* 0.5), -1.0, 1.0, - 0.6 * 10.0, 0.6 * 10.0));
+        float rotation = radians((360.0) + crange(sin(uTime + pos.x*2.3+ vdata.r* 0.2), -1.0, 1.0, - 0.6 * 10.0, 0.6 * 10.0));
         mat4 rotMatrix = rotationMatrix(vec3(sin(uTime*2.0+pos.x*20.0)*0.1,1.0,sin(uTime*2.0+pos.z)), rotation);
-        pos = mix(pos, vec3(rotMatrix * vec4(pos, 1.0)), 0.7 *vdata);
+        pos = mix(pos, vec3(rotMatrix * vec4(pos, 1.0)), vdata * 0.3);
     
     
     
@@ -181,6 +181,11 @@ const frag = `
     vec3 crange(vec3 oldValue, vec3 oldMin, vec3 oldMax, vec3 newMin, vec3 newMax) {
       return clamp(range(oldValue, oldMin, oldMax, newMin, newMax), min(newMin, newMax), max(newMin, newMax));
     }
+    vec3 hue(vec3 color, float hue) {
+      const vec3 k = vec3(0.57735, 0.57735, 0.57735);
+      float cosAngle = cos(hue);
+      return vec3(color * cosAngle + cross(k, color) * sin(hue) + k * dot(k, color) * (1.0 - cosAngle));
+  }
 
 
     void main() { 
@@ -188,9 +193,12 @@ const frag = `
       if (op.r < 0.05) discard;
 
       vec3 color = texture2D(tMap, vUv2).rgb;
+      color = mix(color, vec3(0.115, 0.534, 0.534), 0.7);
 
       float avgColor = (color.r + color.g + color.b) /3.0;
       if (avgColor < 0.2) discard;
+
+      color = hue(color, vData.g);
 
       float alpha = crange(op.r, 0.0, 0.5, 0.0, 1.0);
 
