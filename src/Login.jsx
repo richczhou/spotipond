@@ -64,11 +64,13 @@ function Login() {
 
     function renderSongs(n) {
         if (!songs.length) getSongs(n);
+        /*
         return songs.map(s => (
             <div key={s.title}>
                 {s.title} - {s.artist}
             </div>
         ))
+        */
     }
 
     function parseSongs() {
@@ -85,41 +87,40 @@ function Login() {
     }
 
     async function createPlaylist() {
-        // if (token) {
-        //     getUser().then(
-        //         async function (id) {
-        //             var playlistUrl = `${'https://api.spotify.com/v1/users/'}${id}${'/playlists'}`
+        if (token) {
+            getUser().then(
+                async function (id) {
+                    var playlistUrl = `${'https://api.spotify.com/v1/users/'}${id}${'/playlists'}`
 
-        //             const result = await fetch(playlistUrl, {
-        //             method: 'POST',
-        //             headers: { 'Authorization' : 'Bearer ' + spotify.privPlaylistToken},
-        //             body: JSON.stringify({
-        //                 name: "spotipond finds v8",
-        //                 description: "here are your fresh finds",
-        //                 public: false,
-        //               }),                 
-        //             })
+                    const result = await fetch(playlistUrl, {
+                    method: 'POST',
+                    headers: { 'Authorization' : 'Bearer ' + spotify.privPlaylistToken},
+                    body: JSON.stringify({
+                        name: "spotipond finds v9",
+                        description: "here are your fresh finds",
+                        public: false,
+                      }),                 
+                    })
 
-        //             const data = await result.json();
-        //             // console.log(data);
-        //             playlistId.current = data.id;
-        //             const songUri = parseSongs();
+                    const data = await result.json();
+                    // console.log(data);
+                    playlistId.current = data.id;
+                    const songUri = parseSongs();
 
-        //             var addSongsUrl = `${'https://api.spotify.com/v1/playlists/'}${playlistId.current}${'/'}`
+                    var addSongsUrl = `${'https://api.spotify.com/v1/playlists/'}${playlistId.current}${'/'}`
 
-        //             const result2 = await fetch(addSongsUrl + songUri, {
-        //             method: 'POST',
-        //             headers: { 'Authorization' : 'Bearer ' + spotify.privPlaylistToken},                
-        //             })
+                    const result2 = await fetch(addSongsUrl + songUri, {
+                    method: 'POST',
+                    headers: { 'Authorization' : 'Bearer ' + spotify.privPlaylistToken},                
+                    })
 
-        //             const data2 = await result2.json();
-        //         },
-        //         (e) => {
-        //           console.error(e); 
-        //         },
-        //     );
-        // }
-        playlistId.current = '3TAWFddAhxONhW6o2OVYuW';
+                    const data2 = await result2.json();
+                },
+                (e) => {
+                  console.error(e); 
+                },
+            );
+        }
     }
 
     if (songs.length >= 10) {
@@ -131,7 +132,7 @@ function Login() {
     return (
         <div className="App">
                 {token ? 
-                    window.fresh ?
+                    spotify.fresh ?
                         <>
                             <button onClick={logout}>Logout</button>
                             <p>Fresh Finds (10 songs)</p>

@@ -1,3 +1,9 @@
+import { spotify } from '../Config';
+
+function onClick() {
+    window.location = `${spotify.AUTH_ENDPOINT}?client_id=${spotify.clientId}&redirect_uri=${spotify.redirectUrl}&response_type=${spotify.RESPONSE_TYPE}`;    
+}
+
 function LoginOverlay() {
     return (
     <div className="overlay">
@@ -8,7 +14,7 @@ function LoginOverlay() {
             }}>
                 SpotiPond
             </h1>
-            <button className="spotify-button">
+            <button className="spotify-button" onClick={onClick}>
                 Cultivate your perfect pond
             </button>
         </div>
