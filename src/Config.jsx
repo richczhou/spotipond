@@ -27,10 +27,9 @@ seenBy: [string (url)]
 const fishes = {
     name: "Gerald",
     rarity: "Super Rare",
-    img: "https://cdn.pixabay.com/photo/2016/12/31/21/22/discus-fish-1943755__340.jpg",
+    src: "/fish/fishhead.jpg",
     song: "song url",
-    likes: "rap, dancing",
-    traits: "high energy"
+    text: "Likes: rap, dancing\nTraits: high energy"
 }
 
 export { spotify, fishes };

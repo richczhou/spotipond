@@ -20,7 +20,7 @@
 .playlist {
   pointer-events: all;
   position: relative;
-  top: 75%;
+  top: 15%;
   left: 5%;
   width: 352px;
   height: 700px;
@@ -131,7 +131,7 @@ iframe {
   /* font-display: swap; */
 }
 
-.h0, h1, h2, h3 {
+.h0, h1, h2, h3, h4 {
   font-family: "Circular Bold", sans-serif;
 }
 
