@@ -20,10 +20,10 @@
 .playlist {
   pointer-events: all;
   position: relative;
-  top: 15%;
+  top: 75%;
   left: 5%;
   width: 352px;
-  height: 500px;
+  height: 700px;
   /* background-color: red; */
 }
 
@@ -31,7 +31,7 @@ iframe {
   pointer-events: all;
   border-radius: 12px;
   width: 352px;
-  height: 500px;
+  height: 700px;
 }
 
 #main-container {
