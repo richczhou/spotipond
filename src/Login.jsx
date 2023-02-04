@@ -1,4 +1,4 @@
-import { useState, useEffect, useBool } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import './Login.css'
 
@@ -8,8 +8,9 @@ window.speechiness = 0.5;
 window.tempo = 90.0;
 window.valence = 0.5;
 window.fresh = true; // false if you want all songs, true if you want only 10
-window.privToken = 'BQDpSTnd9pkORWf9XbDBBzdZHHvUv3sGZNaxHb-4m0nuuutUIomUQJBN6Ws6_y_KyWWOjgEmuaWxwONusZfq0EUKBv-SMNAG0RFPmwvZ9RQJae9SUWA1pKRv3gZWZeF0RLkL9dDW6M5xnDnM9d_9rjTVuvDpasCVgbIEI_grxYPFAg';
-window.privPlaylistToken = 'BQAAPJ5J2xVABqxP2xw2X5ln6WvGHszell7lVsezq472IaiQ-tdP-EsGq0efT4o5ti9IMuNUOYV16Pt_w87e2JkKvMOm_nVK2B1cDH6ul4ZkjZAGHU7KLjWloZRDPsT3TNwVIk6x3ziT_1_y7QKNeyKdciC9VCssvJfGWYHJyNS14kNuNMI_pl9Fw6jgPa4q2wAYZAdpPGZrjlhpx7q6-j0vvAWJCVKYtf-U-HJLAV0';
+window.privUserToken = 'BQBN5ymllI0ouzfvz245xbBCiFGksybYhFDIGG5vdGJqJZA8dHFa-ylajxcvdgToYbVzYGkR5J1WNzveh09e1kYzlpTSMj92hV5BRHO06trHkB63aIc6oOPXG15_n2NVdZ8WEGTnnCHRCxcUottzWGsEWs3lavXp4upJ3auz3XZWszsBYz8GQjsqnBdxtA';
+window.privSongToken = 'BQCrTfDH6GjVN0tL8KWLjzwl8FuOsw--h-FjLop7VzuvIV1kldIotmIKkSetWeeQXocx3krnjnRWpA37_tDv17p3y1F-YZNPd-9fJDFViBHIJaBtHWdrOexk-1qsRMqQ1JsgLZhP7pXEs56RL1UKx31W2omuZJSdTIGBzO6xVmyzvw'
+window.privPlaylistToken = 'BQA7xkU1wejStky_43i4Kz0XsqdRzfJm0BGxEoQRrA4aSjxAz7M8S_sx7C9jpkxadUs8BDKTwlpYi4ZI7BBEEZ-mxq3pWZvK3671KwF7meij0VRiw_EOxdOumreu72aR9O5bHJy1kdgSywXN_KzUY9LYkLIOYTVsQeym67vYy8zWjRtr2_Cqkl3C2BJPPEvnX_WmBTmoMmVQP2nn7wZgXtLx_AYhFZ92A5SNYxULJWA';
 
 function Login() {
     const CLIENT_ID = "a56551db3f5d4df7b05e7efa31394e98"
@@ -19,6 +20,7 @@ function Login() {
 
     const [token, setToken] = useState("")
     const [songs, setSongs] = useState([])
+    const playlistId = useRef("");
 
     useEffect(() => {
         const hash = window.location.hash
@@ -42,7 +44,7 @@ function Login() {
     async function getUser() {
         const result = await fetch(`https://api.spotify.com/v1/me`, {
             method: 'GET',
-            headers: { 'Authorization' : 'Bearer ' + window.privToken},
+            headers: { 'Authorization' : 'Bearer ' + window.privUserToken},
         });
         const user = await result.json();
         return user.id;
@@ -52,7 +54,7 @@ function Login() {
         var recomURL = `${'https://api.spotify.com/v1/recommendations?limit='}${n}${'&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=pop&seed_tracks=0c6xIDDpzE81m2q797ordA'}${'&target_danceability='}${window.danceability}${'&target_energy='}${window.energy}${'&target_speechiness='}${window.speechiness}${'&target_tempo='}${window.tempo}${'&target_valence='}${window.valence}`
         const result = await fetch(recomURL, {
             method: 'GET',
-            headers: { 'Authorization' : 'Bearer ' + window.privToken},
+            headers: { 'Authorization' : 'Bearer ' + window.privSongToken},
         })
         const data = await result.json()
 
@@ -102,18 +104,18 @@ function Login() {
                     method: 'POST',
                     headers: { 'Authorization' : 'Bearer ' + window.privPlaylistToken},
                     body: JSON.stringify({
-                        name: "spotipond finds v7",
+                        name: "spotipond finds v8",
                         description: "here are your fresh finds",
                         public: false,
                       }),                 
                     })
 
                     const data = await result.json();
-                    console.log(data);
-                    const playlistID = data.id;
+                    // console.log(data);
+                    playlistId.current = data.id;
                     const songUri = parseSongs();
 
-                    var addSongsUrl = `${'https://api.spotify.com/v1/playlists/'}${playlistID}${'/'}`
+                    var addSongsUrl = `${'https://api.spotify.com/v1/playlists/'}${playlistId.current}${'/'}`
 
                     const result2 = await fetch(addSongsUrl + songUri, {
                     method: 'POST',
@@ -133,6 +135,8 @@ function Login() {
         createPlaylist()
     }
 
+    const iframeSrc = "https://open.spotify.com/embed/playlist/" + playlistId.current + "?utm_source=generator"
+
     return (
         <div className="App">
                 {token ? 
@@ -141,12 +145,30 @@ function Login() {
                             <button onClick={logout}>logout</button>
                             <p>fresh finds (10 songs)</p>
                             { renderSongs(10) }
+                            <iframe
+                                src={iframeSrc}
+                                width="100%"
+                                height="352"
+                                frameBorder="0"
+                                allowFullScreen=""
+                                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                loading="lazy">
+                            </iframe>
                         </>
                         :
                         <>
                             <button onClick={logout}>logout</button>
                             <p>rotten finds (70 songs)</p>
                             { renderSongs(70) }
+                            <iframe
+                                src={iframeSrc}
+                                width="100%"
+                                height="352"
+                                frameBorder="0"
+                                allowFullScreen=""
+                                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                loading="lazy">
+                            </iframe>
                         </>
                     : 
                     <>
