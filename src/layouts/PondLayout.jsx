@@ -3,7 +3,6 @@ import { useRef } from "react";
 import * as THREE from "three"
 import { useLocation } from "wouter";
 
-<<<<<<< Updated upstream
 import LandModel from "./pond/models/LandModel";
 import TreeModel from "./pond/models/TreeModel";
 import WaterModel from "./pond/models/WaterModel";
@@ -11,17 +10,8 @@ import LeavesModel from "./pond/models/LeavesModel";
 import GrassModel from "./pond/models/GrassModel";
 import RockModel from "./pond/models/RockModel";
 import SphereModel from "./pond/models/SphereModel";
-=======
-import LandModel from "./pond/LandModel";
-import TreeModel from "./pond/TreeModel";
-import WaterModel from "./pond/WaterModel";
-import LeavesModel from "./pond/LeavesModel";
-import GrassModel from "./pond/GrassModel";
-import PlantModel from "./pond/PlantModel";
-import RockModel from "./pond/RockModel";
-import SphereModel from "./pond/SphereModel";
-import EDMFishModel from "./pond/EDMFishModel";
->>>>>>> Stashed changes
+import EDMFishModel from "./pond/models/EDMFishModel";
+import PlantModel from "./pond/models/PlantModel";
 import { OrbitControls } from "@react-three/drei";
 
 function PondLayout() {

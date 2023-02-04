@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import * as THREE from "three";
 
-import plant from '../../geo/th_plants.json'
-import { useTHPlantMaterial } from "./THPlantShader";
+import plant from '../../../geo/th_plants.json'
+import { useTHPlantMaterial } from "../shaders/THPlantShader";
 
 function PlantModel() {
     const plantRef = useRef();

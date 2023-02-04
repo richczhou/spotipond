@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import * as THREE from "three";
 
-import edmfish from '../../geo/th_fish_edm.json'
-import { useEDMFishMaterial } from "./EDMFishShader";
+import edmfish from '../../../geo/th_fish_edm.json'
+import { useEDMFishMaterial } from "../shaders/EDMFishShader";
 
 function EDMFishModel() {
     const edmfishRef = useRef();
