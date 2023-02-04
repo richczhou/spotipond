@@ -17,12 +17,21 @@
   pointer-events: none;
 }
 
-#playlist {
+.playlist {
+  pointer-events: all;
+  position: relative;
+  top: 15%;
+  left: 5%;
+  width: 352px;
+  height: 500px;
+  /* background-color: red; */
+}
+
+iframe {
+  pointer-events: all;
   border-radius: 12px;
-  width: 200%;
-  /* height: 352px; */
-  height: 900px;
-  
+  width: 352px;
+  height: 500px;
 }
 
 #main-container {
