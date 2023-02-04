@@ -140,6 +140,13 @@ const frag = `
   uniform float uTime;
   uniform sampler2D tMap;
   uniform sampler2D tOp;
+
+  varying vec3 vData;
+  varying vec2 vUv;
+  varying vec2 vUv2;
+  varying vec3 vNormal;
+  varying vec3 vPos;
+  varying vec3 vViewDir;
   
     float range(float oldValue, float oldMin, float oldMax, float newMin, float newMax) {
       vec3 sub = vec3(oldValue, newMax, oldMax) - vec3(oldMin, newMin, oldMin);

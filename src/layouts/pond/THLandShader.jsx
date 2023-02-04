@@ -28,7 +28,6 @@ export const useTHLandMaterial = ( color ) => {
 
 const vert = `
     attribute vec3 vdata;
-    attribute vec4 random;
 
     uniform sampler2D tMap;
     uniform sampler2D tOp;
@@ -64,6 +63,12 @@ const frag = `
     uniform sampler2D tMap;
     uniform sampler2D tOp;
     uniform vec3 uFresnelColor;
+    
+    varying vec3 vData;
+    varying vec2 vUv;
+    varying vec3 vNormal;
+    varying vec3 vPos;
+    varying vec3 vViewDir;
 
     float range(float oldValue, float oldMin, float oldMax, float newMin, float newMax) {
       vec3 sub = vec3(oldValue, newMax, oldMax) - vec3(oldMin, newMin, oldMin);
@@ -130,7 +135,8 @@ const frag = `
     }
 
     void main() {
-      float posterizeTime = 1.0;
+      float posterizeTime = floor(uTime * 2.4) / 2.4;
+      // float posterizeTime = 1.0;
 
       vec2 spinuv = rotateUV(vUv, posterizeTime, vec2(0.5, 0.5));
       float op = texture2D(tOp, spinuv).r;

@@ -39,7 +39,6 @@ const vert = `
     uniform vec3 uFresnelColor;
     uniform float uTime;
 
-
     varying vec3 vData;
     varying vec2 vUv;
     varying vec3 vNormal;
@@ -161,6 +160,13 @@ const frag = `
     uniform vec3 uColor1;
     uniform vec3 uColor2;
     uniform vec3 uFresnelColor;
+    
+    varying vec3 vData;
+    varying vec2 vUv;
+    varying vec3 vNormal;
+    varying vec3 vPos;
+    varying vec3 vViewDir;
+    varying vec2 vMuv;
 
     float range(float oldValue, float oldMin, float oldMax, float newMin, float newMax) {
       vec3 sub = vec3(oldValue, newMax, oldMax) - vec3(oldMin, newMin, oldMin);
