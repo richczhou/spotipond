@@ -3,16 +3,16 @@ import * as THREE from "three"
 import { useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 
-export const useEDMFishMaterial = ( color ) => {
+export const useDancingFishMaterial = ( color ) => {
   const mat = useMemo(
     () =>
       new ShaderMaterial({
         uniforms: {
-          tMap: new Uniform(new THREE.TextureLoader().load( "tex/fish_edm.png" )),
+          tMap: new Uniform(new THREE.TextureLoader().load( "tex/fishpattern-studio.png" )),
           uDance: new Uniform(0.0),
           uEDM: new Uniform(0.0),
-          uColor: new Uniform(color),
-          uFresnelColor: new Uniform(color),
+          uColor: new Uniform(new THREE.Color("#4A94A6")),
+          uFresnelColor: new Uniform(new THREE.Color("#4A94A6")),
           uTime: new Uniform(0)
         },
         vertexShader: vert,
@@ -126,7 +126,7 @@ const vert = `
         vData = vdata;
 
         float rotationX = sin(uTime*3.2+vdata.x*4.0)*0.3;
-        float rotationZ = 0.7 * sin(-uTime*6.2+vdata.x*2.6)*0.3;
+        float rotationZ = 1.0 * sin(-uTime*2.2+vdata.x*2.6)*0.3;
         
         mat4 rotMatrixX = rotationMatrix(vec3(1.0, 0.0, 0.0), rotationX);
         mat4 rotMatrixZ = rotationMatrix(vec3(0.0, 1.0, 0.0), rotationZ);
@@ -134,11 +134,11 @@ const vert = `
         pos = vec3(rotMatrixX * vec4(pos, 1.0));
         pos = vec3(rotMatrixZ * vec4(pos, 1.0));
 
-        pos -= vec3(0.0, 1.9, 0.0);
-        mat4 spin = rotationMatrix(vec3(0.0, 1.0, 0.0), 3.0 * sin(uTime));
+        pos -= vec3(0.0, 1.4, 0.0);
+        mat4 spin = rotationMatrix(vec3(0.0, 1.0, 0.0), 3.0 * sin(uTime * 0.43));
         pos = vec3(spin * vec4(pos, 1.0));
-        pos.x += sin(uTime);
-        pos.z += sin(uTime * 0.5);
+        pos.x += sin(uTime * 0.3);
+        pos.z += sin(uTime * 0.15);
 
         vec4 worldPos = modelMatrix * vec4(pos, 1.0);
 
@@ -156,7 +156,6 @@ const vert = `
 const frag = `
     uniform sampler2D tMap;
     uniform float uDance;
-    uniform float uEDM;
     uniform vec3 uColor;
     uniform vec3 uFresnelColor;
     uniform float uTime;
@@ -210,23 +209,14 @@ const frag = `
         return ro + (1. - ro) * pow((1. - d), 5.);
     }
 
-    vec3 hue(vec3 color, float hue) {
-        const vec3 k = vec3(0.57735, 0.57735, 0.57735);
-        float cosAngle = cos(hue);
-        return vec3(color * cosAngle + cross(k, color) * sin(hue) + k * dot(k, color) * (1.0 - cosAngle));
-    }
 
     void main() {
-        vec3 color = texture2D(tMap, vUv).rgb;
-        color *= uColor;
+        vec3 color = vec3(0.1, 0.2, 0.2);
 
         float fresnel = getFresnel(vNormal, vViewDir, 0.5);
         fresnel = smoothstep(0.0, 1.0, fresnel);
 
-        vec3 rainbow = hue(color, uTime * 7.0);
-        color = mix(color, rainbow, 1.0);
-
-        color.rgb = mix(color.rgb, uFresnelColor, fresnel * 0.6);
+        color.rgb = mix(color.rgb, vec3(0.99), fresnel * 0.6);
 
         gl_FragColor = vec4(color, 1.0);
     }

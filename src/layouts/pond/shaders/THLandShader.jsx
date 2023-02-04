@@ -139,7 +139,7 @@ const frag = `
     }
 
     void main() {
-      float posterizeTime = floor(uTime * 0.4) / 0.4;
+      float posterizeTime = floor(uTime * 0.7) / 0.7;
       // float posterizeTime = 1.0;
 
       vec2 spinuv = rotateUV(vUv, posterizeTime, vec2(0.5, 0.5));
