@@ -31,7 +31,8 @@ function PondLayout() {
 
     return (
         <>
-        <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
+        <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} 
+                       enableDamping={true} dampingFactor={0.1}/>
         <group 
             position={[0, 0, 0]}> 
 

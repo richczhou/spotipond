@@ -20,7 +20,7 @@
 .playlist {
   pointer-events: all;
   position: relative;
-  top: 75%;
+  top: 15%;
   left: 5%;
   width: 352px;
   height: 700px;
@@ -81,7 +81,7 @@ iframe {
   width: fit-content;
   font-size: 1em;
   font-family: 'Circular Bold';
-  margin: 2.5em 3em;
+  margin: 1.5em 3em;
   padding: 0.8em 2.5em;
   color: var(--spotify-white);
   background-color: var(--spotify-dark);
@@ -105,8 +105,8 @@ iframe {
   --spotify-white: #FFFFFF;
   --spotify-light: #F0F0F0;
   --spotify-grey: #535353;
-  --spotify-dark: #191414;
-  --spotify-green: #1DB954;
+  --spotify-dark: #0f004e;
+  --spotify-green: #0fa2c7;
 
   /* OUR OWN COLORS */
   --pond-white: #F4FAFF;
@@ -118,8 +118,20 @@ iframe {
   --pond-aqua: #72AEFB;
 }
 
+@font-face {
+  font-family: "Circular";
+  src: url("/fonts/Circular-Bold.ttf") format('truetype');
+  font-weight: 500;
+  /* font-display: swap; */
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/Roboto-Regular.ttf") format('truetype');
+  font-weight: 300;
+  /* font-display: swap; */
+}
 
-.h0, h1, h2, h3 {
+.h0, h1, h2, h3, h4 {
   font-family: "Circular Bold", sans-serif;
 }
 
@@ -132,7 +144,7 @@ p {
 }
 
 h1 {
-  font-size: 4.5em;
+  font-size: 7.5em;
 }
 
 h2 {

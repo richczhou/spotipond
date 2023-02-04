@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { spotify } from '../Config';
+import FishCard from "./FishCard";
 
 function MainOverlay() {
     const [isActive, setActive] = useState(false);
@@ -105,7 +106,7 @@ function MainOverlay() {
     const iframeSrc = "https://open.spotify.com/embed/playlist/" + playlistId.current + "?utm_source=generator"
 
     function pullUp() {
-        if (!isReady) return;
+        if (!isReady || playlistRef.current.style.top == '15%') return;
         setReady(false);
 
         setActive(true);
@@ -113,16 +114,18 @@ function MainOverlay() {
         // playlistRef.current.style.top = '15%';
         playlistRef.current.animate([
             // keyframes
-            { transform: 'translateY(0%)' },
-            { transform: 'translateY(-60%)' }
+            { transform: 'translateY(0px)' },
+            { transform: 'translateY(-500px)' }
           ], {
             // timing options
-            duration: 300,
-            iterations: 1
+            duration: 500,
+            direction: 'normal',
+            easing: "ease-in",
+            iterations: 1,
         });
         setTimeout(() => {
-            playlistRef.current.style.top = '15%';
-        }, 300);  
+            playlistRef.current.style.top = 'calc(75% - 500px)';
+        }, 499);  
 
         setTimeout(() => {
             setReady(true);
@@ -156,9 +159,10 @@ function MainOverlay() {
                         allowFullScreen={0} 
                         allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
                         loading="lazy" 
-                        onPointerOver={pullUp}
-                        onPointerOut={pullDown} />
+                        onPointerOver={null}
+                        onPointerOut={null} />
             </div>
+            <FishCard />
         </div>
     </div>
     )

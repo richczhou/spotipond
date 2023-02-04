@@ -1,0 +1,57 @@
+
+
+.fish-card {
+    position:absolute;
+    top: 50px;
+    right: 50px;
+  
+    border: 4px solid var(--spotify-dark);
+    border-radius: 25px;
+    width: 500px;
+    height: 300px;
+    
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .fish-headshot {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    border: 2px solid var(--spotify-dark);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    background-color: red;
+  }
+  
+  .fish-headshot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .fish-name {
+    position: absolute;
+    top: 15px;
+    left: 105px;
+    color: var(--spotify-dark);
+  }
+  
+  .fish-rarity {
+    position: absolute;
+    top: 58px;
+    left: 105px;
+    width: 400px;
+    color: var(--pond-blue);
+  }
+  
+  .fish-text {
+    position: absolute;
+    white-space: pre;
+    top: 90px;
+    left: 105px;
+    width: 400px;
+    color: var(--spotify-grey);
+  }
+  
