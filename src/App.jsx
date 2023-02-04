@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Canvas } from "@react-three/fiber"
 // import reactLogo from './assets/react.svg'
 
