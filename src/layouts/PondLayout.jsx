@@ -8,6 +8,8 @@ import TreeModel from "./pond/TreeModel";
 import WaterModel from "./pond/WaterModel";
 import LeavesModel from "./pond/LeavesModel";
 import GrassModel from "./pond/GrassModel";
+import RockModel from "./pond/RockModel";
+import SphereModel from "./pond/SphereModel";
 import { OrbitControls } from "@react-three/drei";
 
 function PondLayout() {
@@ -43,6 +45,8 @@ function PondLayout() {
             <WaterModel />
             <LeavesModel />
             <GrassModel />
+            <RockModel />
+            <SphereModel />
             
         </group> 
         </>

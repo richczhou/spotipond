@@ -3,13 +3,13 @@ import * as THREE from "three"
 import { useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 
-export const useTHBushMaterial = ( color ) => {
+export const useTHLeavesMaterial = ( color ) => {
   const mat = useMemo(
     () =>
       new ShaderMaterial({
         uniforms: {
-          tMap: new Uniform(new THREE.TextureLoader().load( "tex/th_land.jpg" )),
-          tOp: new Uniform(new THREE.TextureLoader().load( "tex/th_grass2.png" )),
+          tMap: new Uniform(new THREE.TextureLoader().load( "tex/th_tree.jpg" )),
+          tOp: new Uniform(new THREE.TextureLoader().load( "tex/bush_leaves2.jpg" )),
           uTime: new Uniform(0)
         },
         vertexShader: vert,
@@ -18,6 +18,8 @@ export const useTHBushMaterial = ( color ) => {
     [color]
   );
 
+  mat.side = THREE.DoubleSide;
+  
   useFrame(({ clock }) => {
     //mat.uniforms.uColor.value = color;
     mat.uniforms.uTime.value = clock.getElapsedTime();
@@ -117,8 +119,8 @@ const vert = `
     
     
         float rotation = radians((360.0) + crange(sin(uTime + pos.x*5.3+ vdata.r* 0.5), -1.0, 1.0, - 0.6 * 10.0, 0.6 * 10.0));
-        mat4 rotMatrix = rotationMatrix(vec3(sin(uTime*2.0+pos.x*20.0)*0.1,1.0,sin(uTime*2.0+pos.z)), rotation);
-        pos = mix(pos, vec3(rotMatrix * vec4(pos, 1.0)), vdata);
+        mat4 rotMatrix = rotationMatrix(vec3(sin(uTime*2.0+pos.x*20.0)*0.1,1.0,0.8 * sin(uTime*2.0+pos.z)), rotation);
+        pos = mix(pos, vec3(rotMatrix * vec4(pos, 1.0)), 0.5*vdata);
     
     
     

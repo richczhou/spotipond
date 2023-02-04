@@ -2,11 +2,11 @@ import { useRef } from "react";
 import * as THREE from "three";
 
 import leaves from '../../geo/th_treeleaves.json'
-import { useTHBushMaterial } from "./THBushShader";
+import { useTHLeavesMaterial } from "./THLeavesShader";
 
 function LeavesModel() {
     const leavesRef = useRef();
-    const leavesMat = useTHBushMaterial(new THREE.Color('#FF0000'));
+    const leavesMat = useTHLeavesMaterial(new THREE.Color('#FF0000'));
 
     return (
         <mesh

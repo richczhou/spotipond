@@ -10,9 +10,9 @@ export const useTHWaterMaterial = ( color ) => {
         uniforms: {
           tMap: new Uniform(new THREE.TextureLoader().load( "tex/th_land.jpg" )),
           tMatcap: new Uniform(new THREE.TextureLoader().load( "tex/th_land.jpg" )),
-          uColor1: new Uniform(color),
-          uColor2: new Uniform(color),
-          uFresnelColor: new Uniform(color),
+          uColor1: new Uniform(new THREE.Color("#4A94A6")),
+          uColor2: new Uniform(new THREE.Color("#1A96B5")),
+          uFresnelColor: new Uniform(new THREE.Color("#1A96B5")),
           uTime: new Uniform(0)
         },
         vertexShader: vert,
@@ -20,6 +20,8 @@ export const useTHWaterMaterial = ( color ) => {
       }),
     [color]
   );
+
+  mat.transparent = true;
 
   useFrame(({ clock }) => {
     mat.uniforms.uTime.value = clock.getElapsedTime();
@@ -239,11 +241,11 @@ const frag = `
 
       float fresnel = getFresnel(vNormal, vViewDir, 0.5);
       fresnel = smoothstep(0.0, 1.0, fresnel);
-      color.rgb += fresnel * uFresnelColor * 0.4;
+      //color.rgb += fresnel * uFresnelColor * 0.4;
 
-      float op = crange(vData.r, 0.0, 0.8, 0.0, 0.8);
+      float op = crange(vData.r, 0.0, 1.0, 0.0, 0.7);
 
-      if (op < 0.25) discard;
+      if (op < 0.1) discard;
 
       gl_FragColor = vec4(color, op);
     }
