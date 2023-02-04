@@ -9,7 +9,7 @@ function LoginOverlay() {
                 SpotiPond
             </h1>
             <button className="spotify-button">
-                Dive into new your taste
+                Dive into your new taste
             </button>
         </div>
     </div>
