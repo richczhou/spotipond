@@ -1,4 +1,5 @@
 import { ShaderMaterial, Uniform } from 'three'
+import * as THREE from "three"
 import { useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 
@@ -22,7 +23,7 @@ export const useTHFishMaterial = ( color ) => {
 
   useFrame(({ clock }) => {
     mat.uniforms.uFresnelColor.value = color;
-    mat.uniforms.UTime.value = clock.getElapsedTime();
+    mat.uniforms.uTime.value = clock.getElapsedTime();
     //mat.uniforms.uDance
   });
 
@@ -148,6 +149,7 @@ const vert = `
 
 const frag = `
     uniform float uTime;
+    uniform sampler2D tMap;
     
     float range(float oldValue, float oldMin, float oldMax, float newMin, float newMax) {
         vec3 sub = vec3(oldValue, newMax, oldMax) - vec3(oldMin, newMin, oldMin);

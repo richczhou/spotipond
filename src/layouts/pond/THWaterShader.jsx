@@ -1,4 +1,5 @@
 import { ShaderMaterial, Uniform } from 'three'
+import * as THREE from "three"
 import { useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 
@@ -21,8 +22,7 @@ export const useTHWaterMaterial = ( color ) => {
   );
 
   useFrame(({ clock }) => {
-    mat.uniforms.uColor.value = color;
-    mat.uniforms.UTime.value = clock.getElapsedTime();
+    mat.uniforms.uTime.value = clock.getElapsedTime();
   });
 
   return mat;
@@ -156,6 +156,12 @@ const vert = `
 
 const frag = `
     uniform float uTime;
+    uniform sampler2D tMap;
+    uniform sampler2D tMatcap;
+    uniform vec3 uColor1;
+    uniform vec3 uColor2;
+    uniform vec3 uFresnelColor;
+
     float range(float oldValue, float oldMin, float oldMax, float newMin, float newMax) {
       vec3 sub = vec3(oldValue, newMax, oldMax) - vec3(oldMin, newMin, oldMin);
       return sub.x * sub.y / sub.z + newMin;
@@ -214,7 +220,7 @@ const frag = `
     }
 
     void main() {
-      vec2 st = vMuv * 2.0;
+      vec2 st = vMuv * vec2(2.0);
       st = rotateUV(st, uTime * 0.02, vec2(0.0,0.0));
 
       vec4 matCap = texture2D(tMatcap, st);

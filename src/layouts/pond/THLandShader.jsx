@@ -1,4 +1,5 @@
 import { ShaderMaterial, Uniform } from 'three'
+import * as THREE from "three"
 import { useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 
@@ -19,8 +20,7 @@ export const useTHLandMaterial = ( color ) => {
   );
 
   useFrame(({ clock }) => {
-    mat.uniforms.uColor.value = color;
-    mat.uniforms.UTime.value = clock.getElapsedTime();
+    mat.uniforms.uTime.value = clock.getElapsedTime();
   });
 
   return mat;
@@ -61,6 +61,10 @@ const vert = `
 
 const frag = `
     uniform float uTime;
+    uniform sampler2D tMap;
+    uniform sampler2D tOp;
+    uniform vec3 uFresnelColor;
+
     float range(float oldValue, float oldMin, float oldMax, float newMin, float newMax) {
       vec3 sub = vec3(oldValue, newMax, oldMax) - vec3(oldMin, newMin, oldMin);
       return sub.x * sub.y / sub.z + newMin;
@@ -91,6 +95,7 @@ const frag = `
     vec3 crange(vec3 oldValue, vec3 oldMin, vec3 oldMax, vec3 newMin, vec3 newMax) {
       return clamp(range(oldValue, oldMin, oldMax, newMin, newMax), min(newMin, newMax), max(newMin, newMax));
     }
+    
     float getFresnel(vec3 normal, vec3 viewDir, float power) {
       float d = dot(normalize(normal), normalize(viewDir));
       return 1.0 - pow(abs(d), power);
@@ -125,7 +130,7 @@ const frag = `
     }
 
     void main() {
-      float posterizeTime = floor(uTime * 2.4) / 2.4;
+      float posterizeTime = 1.0;
 
       vec2 spinuv = rotateUV(vUv, posterizeTime, vec2(0.5, 0.5));
       float op = texture2D(tOp, spinuv).r;

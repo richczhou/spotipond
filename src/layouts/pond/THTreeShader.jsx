@@ -1,4 +1,5 @@
 import { ShaderMaterial, Uniform } from 'three'
+import * as THREE from "three"
 import { useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 
@@ -23,6 +24,7 @@ export const useTHTreeMaterial = ( color ) => {
 
 const vert = `
     uniform sampler2D tMap;
+
     varying vec2 vUv;
     varying vec3 vPos;
 
@@ -41,6 +43,8 @@ const vert = `
     `
 
 const frag = `
+    uniform sampler2D tMap;
+    
     void main() {
       vec3 color = texture2D(tMap, vUv).rgb;
       gl_FragColor = vec4(color, 1.0);

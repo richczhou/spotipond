@@ -3,11 +3,11 @@ import { useRef } from "react";
 import * as THREE from "three"
 import { useLocation } from "wouter";
 
-import LandModel from "./LandModel";
-import TreeModel from "./TreeModel";
-import WaterModel from "./WaterModel";
-import LeavesModel from "./LeavesModel";
-import GrassModel from "./GrassModel";
+import LandModel from "./pond/LandModel";
+// import TreeModel from "./pond/TreeModel";
+import WaterModel from "./pond/WaterModel";
+import LeavesModel from "./pond/LeavesModel";
+import GrassModel from "./pond/GrassModel";
 
 function PondLayout() {
     const cubeRef = useRef();
@@ -18,7 +18,7 @@ function PondLayout() {
 
     useFrame((state, delta) => {
         // console.log(groupRef.current);
-        cubeRef.current.rotation.y = 0.54 * Math.sin(state.clock.elapsedTime * 0.6);
+        // cubeRef.current.rotation.y = 0.54 * Math.sin(state.clock.elapsedTime * 0.6);
     });
 
     return (
@@ -36,7 +36,7 @@ function PondLayout() {
                 geometry={geometry}>
             </mesh> */}
             <LandModel />
-            <TreeModel />
+            {/* <TreeModel /> */}
             <WaterModel />
             <LeavesModel />
             <GrassModel />

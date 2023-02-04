@@ -27,12 +27,6 @@ function LandModel() {
                     itemSize={2}
                 />
                 <bufferAttribute
-                    attach='attributes-uv2'
-                    array={new Float32Array(land.data.attributes.uv2.array)}
-                    count={land.data.attributes.uv2.array.length / 3}
-                    itemSize={2}
-                />
-                <bufferAttribute
                     attach='attributes-normal'
                     array={new Float32Array(land.data.attributes.normal.array)}
                     count={land.data.attributes.normal.array.length / 3}

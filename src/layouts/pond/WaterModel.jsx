@@ -27,12 +27,6 @@ function WaterModel() {
                     itemSize={2}
                 />
                 <bufferAttribute
-                    attach='attributes-uv2'
-                    array={new Float32Array(water.data.attributes.uv2.array)}
-                    count={water.data.attributes.uv2.array.length / 3}
-                    itemSize={2}
-                />
-                <bufferAttribute
                     attach='attributes-normal'
                     array={new Float32Array(water.data.attributes.normal.array)}
                     count={water.data.attributes.normal.array.length / 3}
