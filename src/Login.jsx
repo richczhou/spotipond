@@ -1,14 +1,13 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useBool } from 'react'
 import './App.css'
 import './Login.css'
-// import axios from 'axios'
-
 
 window.danceability = 0.5;
 window.energy = 0.5;
 window.speechiness = 0.5;
 window.tempo = 90.0;
 window.valence = 0.5;
+window.fresh = false; // change to false if you want all songs
 
 
 function Login() {
@@ -39,15 +38,14 @@ function Login() {
         window.localStorage.removeItem("token")
     }
 
-    async function getSongs() {
+    async function getSongs(n) {
         var token = 'BQC7NpmdoZiz3cdZnZhgcEs9hXcRlxdUD9TGSTzIM5SHUCsmdW78uOVaPljKS8x3SS7U7bgAjlEmnE5XhowByOFRmHp5KOpArBSJR6HX6iVkp7dQMorqXz12l8b3YP1L1fELsbUiYsyYrg6YVVJTkCb_ajFb6nGYY4lftqRDH-q8Cg';
-        var recomURL = `${'https://api.spotify.com/v1/recommendations?limit=3&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=pop&seed_tracks=0c6xIDDpzE81m2q797ordA'}${'&target_danceability='}${window.danceability}${'&target_energy='}${window.energy}${'&target_speechiness='}${window.speechiness}${'&target_tempo='}${window.tempo}${'&target_valence='}${window.valence}`
+        var recomURL = `${'https://api.spotify.com/v1/recommendations?limit='}${n}${'&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=pop&seed_tracks=0c6xIDDpzE81m2q797ordA'}${'&target_danceability='}${window.danceability}${'&target_energy='}${window.energy}${'&target_speechiness='}${window.speechiness}${'&target_tempo='}${window.tempo}${'&target_valence='}${window.valence}`
         const result = await fetch(recomURL, {
             method: 'GET',
             headers: { 'Authorization' : 'Bearer ' + token},
         })
         const data = await result.json()
-        // console.log(data)
 
         let recomSongs = []
 
@@ -59,14 +57,12 @@ function Login() {
             }
             recomSongs.push(newSong)
         }
-        setSongs(recomSongs)
-        // console.log(recomSongs)
+        setSongs(recomSongs) // i hate state >:(
     }
 
-    function renderSongs () {
+    function renderSongs(n) {
         console.log(songs, songs.length)
-        if (!songs.length) getSongs();
-        // getSongs()
+        if (!songs.length) getSongs(n);
         return songs.map(s => (
             <div key={s.title}>
                 {s.title} - {s.artist}
@@ -77,17 +73,23 @@ function Login() {
     return (
         <div className="App">
                 {!token ?
-                    <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login
-                        to Spotify</a>
-                    : <button onClick={logout}>Logout</button>}
+                    <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>login
+                        </a>
+                    : <button onClick={logout}>logout</button>}
 
                 {token ?
-                    <>
-                    <p>these are the user's recommended songs</p>
-                    { renderSongs() }
-                    </>
+                    window.fresh ?
+                        <>
+                            <p>fresh finds</p>
+                            { renderSongs(10) }
+                        </>
+                        :
+                        <>
+                            <p>rotten finds</p>
+                            { renderSongs(70) }
+                        </>
                     : <h2>pls login</h2>
-                }      
+                }
         </div>
     );
 }
