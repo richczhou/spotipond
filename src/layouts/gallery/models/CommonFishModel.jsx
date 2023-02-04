@@ -1,41 +1,41 @@
 import { useRef } from "react";
 import { useLocation } from "wouter";
+import { useSpring, animated } from "@react-spring/three";
 import * as THREE from "three";
 
 import commonfish from '../../../geo/th_fish_basic1.json'
 import { useCommonFishMaterial } from "../shaders/CommonFishShader";
+import { useState } from "react";
 
 function CommonFishModel() {
     const commonfishRef = useRef();
     const commonfishMat = useCommonFishMaterial(new THREE.Color('#FF0000'));
+    const [active, setActive] = useState(true);
 
     function onOver() {
-        // console.log(commonfishRef.current)
-        commonfishRef.current.scale.x = 0.09;
-        commonfishRef.current.scale.y = 0.09;
-        commonfishRef.current.scale.z = 0.09;
+        setActive(!active);
     }
 
     function onOut() {
-        commonfishRef.current.scale.x = 0.06;
-        commonfishRef.current.scale.y = 0.06;
-        commonfishRef.current.scale.z = 0.06;
+        setActive(!active);
     }
 
     function onClick() {
         setLocation('/main');
     }
 
+    const { scale } = useSpring({ scale: active ? 0.06 : 0.09 });
+
     const [, setLocation] = useLocation();
 
     return (
-        <mesh
+        <animated.mesh
             ref={commonfishRef}
             onPointerOver={onOver}
             onPointerOut={onOut}
             onClick={onClick}
             material={commonfishMat}
-            scale={0.06}
+            scale={scale}
             position={[-0.2, 0, 0]}>
             <bufferGeometry attach="geometry">
                 <bufferAttribute
@@ -69,7 +69,7 @@ function CommonFishModel() {
                     itemSize={1}
                 />
             </bufferGeometry>
-        </mesh>
+        </animated.mesh>
     )
 }
 

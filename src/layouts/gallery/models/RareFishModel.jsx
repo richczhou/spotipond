@@ -1,26 +1,26 @@
 import { useRef } from "react";
 import { useLocation } from "wouter";
+import { useSpring, animated } from "@react-spring/three";
 import * as THREE from "three";
 
 import rarefish from '../../../geo/th_fish_rare.json'
 import { useRareFishMaterial } from "../shaders/RareFishShader";
+import { useState } from "react";
 
 function RareFishModel() {
     const rarefishRef = useRef();
     const rarefishMat = useRareFishMaterial(new THREE.Color('#FF0000'));
+    const [active, setActive] = useState(true);
 
     function onOver() {
-        // console.log(rarefishRef.current)
-        rarefishRef.current.scale.x = 0.24;
-        rarefishRef.current.scale.y = 0.24;
-        rarefishRef.current.scale.z = 0.24;
+        setActive(!active);
     }
 
     function onOut() {
-        rarefishRef.current.scale.x = 0.18;
-        rarefishRef.current.scale.y = 0.18;
-        rarefishRef.current.scale.z = 0.18;
+        setActive(!active);
     }
+
+    const { scale } = useSpring({ scale: active ? 0.18 : 0.24 })
 
     function onClick() {
         setLocation('/main');
@@ -29,13 +29,13 @@ function RareFishModel() {
     const [, setLocation] = useLocation();
 
     return (
-        <mesh
+        <animated.mesh
             ref={rarefishRef}
             material={rarefishMat}
             onPointerOver={onOver}
             onPointerOut={onOut}
             onClick={onClick}
-            scale={0.18}
+            scale={scale}
             position={[0.2, 0, 0]}>
             <bufferGeometry attach="geometry">
                 <bufferAttribute
@@ -69,7 +69,7 @@ function RareFishModel() {
                     itemSize={1}
                 />
             </bufferGeometry>
-        </mesh>
+        </animated.mesh>
     )
 }
 

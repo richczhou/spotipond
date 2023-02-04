@@ -1,40 +1,40 @@
 import { useRef } from "react";
 import { useLocation } from "wouter";
+import { useSpring, animated } from "@react-spring/three";
 import * as THREE from "three";
 
 import uncommonfish from '../../../geo/th_fish_dancing.json'
 import { useUncommonFishMaterial } from "../shaders/UncommonFishShader";
+import { useState } from "react";
 
 function UncommonFishModel() {
     const uncommonfishRef = useRef();
     const uncommonfishMat = useUncommonFishMaterial(new THREE.Color('#FF0000'));
+    const [active, setActive] = useState(true);
 
     function onOver() {
-        // console.log(commonfishRef.current)
-        uncommonfishRef.current.scale.x = 0.16;
-        uncommonfishRef.current.scale.y = 0.16;
-        uncommonfishRef.current.scale.z = 0.16;
+        setActive(!active);
     }
 
     function onOut() {
-        uncommonfishRef.current.scale.x = 0.12;
-        uncommonfishRef.current.scale.y = 0.12;
-        uncommonfishRef.current.scale.z = 0.12;
+        setActive(!active);
     }
 
     function onClick() {
         setLocation('/main');
     }
 
+    const { scale } = useSpring({ scale: active ? 0.12 : 0.16 })
+
     const [, setLocation] = useLocation();
     return (
-        <mesh
+        <animated.mesh
             ref={uncommonfishRef}
             material={uncommonfishMat}
             onPointerOver={onOver}
             onPointerOut={onOut}
             onClick={onClick}
-            scale={0.12}
+            scale={scale}
             position={[0, 0, 0]}>
             <bufferGeometry attach="geometry">
                 <bufferAttribute
@@ -68,7 +68,7 @@ function UncommonFishModel() {
                     itemSize={1}
                 />
             </bufferGeometry>
-        </mesh>
+        </animated.mesh>
     )
 }
 
