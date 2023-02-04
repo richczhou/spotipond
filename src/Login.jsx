@@ -40,7 +40,7 @@ function Login() {
     }
 
     async function getSongs() {
-        var token = 'BQCSALifVGyy_egp2TC7oWZaoMZlNUYhRAqOBcVLLjT883d9tXLJaRf9QnkvL6LmtokAzMRFB_pOKCBbxc3wmdOrGvCF_o6WOIUyjuh2Q5wGbbLU7Dslf1YrPWBEDnbO75kb5-dqwGwuI6qULjokkZ9CH8Iu62Hd18qUtvKI_DyLTg';
+        var token = 'BQC7NpmdoZiz3cdZnZhgcEs9hXcRlxdUD9TGSTzIM5SHUCsmdW78uOVaPljKS8x3SS7U7bgAjlEmnE5XhowByOFRmHp5KOpArBSJR6HX6iVkp7dQMorqXz12l8b3YP1L1fELsbUiYsyYrg6YVVJTkCb_ajFb6nGYY4lftqRDH-q8Cg';
         var recomURL = `${'https://api.spotify.com/v1/recommendations?limit=3&seed_artists=4NHQUGzhtTLFvgF5SZesLK&seed_genres=pop&seed_tracks=0c6xIDDpzE81m2q797ordA'}${'&target_danceability='}${window.danceability}${'&target_energy='}${window.energy}${'&target_speechiness='}${window.speechiness}${'&target_tempo='}${window.tempo}${'&target_valence='}${window.valence}`
         const result = await fetch(recomURL, {
             method: 'GET',
