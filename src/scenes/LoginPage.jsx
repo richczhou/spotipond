@@ -6,11 +6,11 @@ import LoginOverlay from "../ui/LoginOverlay";
 
 function LoginPage() {
     return <>
-        <LoginOverlay/>
-        
         <Canvas className="main-canvas" camera={{fov: 50, position:[-0.5, 1.5, 1.5]}} >
             <PondLayout />
         </Canvas>
+
+        <LoginOverlay/>
     </>
 }
 

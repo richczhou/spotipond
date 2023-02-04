@@ -14,7 +14,7 @@ function GalleryLayout() {
 
     return (
         <group 
-            position={[0, 0, 0]}
+            position={[0, 0.05, 0]}
             ref={groupRef}> 
 
             <mesh

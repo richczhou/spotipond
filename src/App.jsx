@@ -6,6 +6,7 @@ import { useLocation, Switch, Route } from "wouter"
 
 import './App.css'
 import LoginPage from './scenes/LoginPage';
+import GalleryPage from './scenes/GalleryPage';
 import MainPage from './scenes/MainPage';
 import PondLayout from './layouts/PondLayout';
 
@@ -14,15 +15,16 @@ function App() {
 
   return (
     <div className="App">
-        {/* <Switch location={location}>
+        <Switch location={location}>
           <Route path="/" component={LoginPage} />
           <Route path="/login" component={MainPage} />
-        </Switch> */}
+          <Route path="/gallery" component={GalleryPage} />
+        </Switch>
 
         {/* KIMBO COMMENT OUT EVERYTHING BELOW */}
-        <Canvas className="main-canvas" camera={{fov: 50, position:[-0.5, 1.5, 1.5]}} >
+        {/* <Canvas className="main-canvas" camera={{fov: 50, position:[-0.5, 1.5, 1.5]}} >
           <PondLayout />
-        </Canvas>
+        </Canvas> */}
     </div>
   )
 }

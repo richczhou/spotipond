@@ -1,9 +1,17 @@
 function LoginOverlay() {
     return (
     <div className="overlay">
-        <h1 style={{color: "var(--spotify-green)"}}>
-            spotipond
-        </h1>
+        <div id="hero-container" >
+            <h1 style={{
+                color: "var(--spotify-light)",
+                textAlign: 'center'
+            }}>
+                SpotiPond
+            </h1>
+            <button className="spotify-button">
+                Cultivate your perfect pond
+            </button>
+        </div>
     </div>
     )
 }
