@@ -9,7 +9,7 @@ window.tempo = 90.0;
 window.valence = 0.5;
 window.fresh = true; // false if you want all songs, true if you want only 10
 window.privToken = 'BQDpSTnd9pkORWf9XbDBBzdZHHvUv3sGZNaxHb-4m0nuuutUIomUQJBN6Ws6_y_KyWWOjgEmuaWxwONusZfq0EUKBv-SMNAG0RFPmwvZ9RQJae9SUWA1pKRv3gZWZeF0RLkL9dDW6M5xnDnM9d_9rjTVuvDpasCVgbIEI_grxYPFAg';
-window.privPlaylistToken = 'BQCq4uvWlwBkjzId6RoW-RvL7dS040fHaCtcZ-fSW9AgoqjhigQv57Wm4wtoVNDgqC5PXjrjNlCc_Xdm8Rfxv21o_b_4etlDFkiheuFp7WiVBBxoEclDGhFTih2ZdnZ9KvdiKoT_IPhf6EnGjQYaD1CuDp_69WzwU8g-6VzhsUTeWp23jhvfWySfRpOXMhdtvorYLXnFO98Vw25u1MAGXYqrLZ8teTtW-XzJT54tz-Q';
+window.privPlaylistToken = 'BQAAPJ5J2xVABqxP2xw2X5ln6WvGHszell7lVsezq472IaiQ-tdP-EsGq0efT4o5ti9IMuNUOYV16Pt_w87e2JkKvMOm_nVK2B1cDH6ul4ZkjZAGHU7KLjWloZRDPsT3TNwVIk6x3ziT_1_y7QKNeyKdciC9VCssvJfGWYHJyNS14kNuNMI_pl9Fw6jgPa4q2wAYZAdpPGZrjlhpx7q6-j0vvAWJCVKYtf-U-HJLAV0';
 
 function Login() {
     const CLIENT_ID = "a56551db3f5d4df7b05e7efa31394e98"
@@ -78,26 +78,49 @@ function Login() {
             </div>
         ))
     }
-    
+
+    function parseSongs() {
+        const prefix = "spotify%3Atrack%3A";
+        const suffix = "%2C";
+        var songUri = "tracks?uris=";
+        if (songs.length) {
+            for (let i = 0; i < songs.length; i++) {
+                const song = songs[i]
+                songUri += (prefix + song.id + suffix)
+            }
+        }
+        return songUri;
+    }
+
     async function createPlaylist() {
         if (token) {
             getUser().then(
                 async function (id) {
-                    console.log(id);
                     var playlistUrl = `${'https://api.spotify.com/v1/users/'}${id}${'/playlists'}`
 
                     const result = await fetch(playlistUrl, {
                     method: 'POST',
                     headers: { 'Authorization' : 'Bearer ' + window.privPlaylistToken},
                     body: JSON.stringify({
-                        name: "spotipond finds!!",
+                        name: "spotipond finds v7",
                         description: "here are your fresh finds",
                         public: false,
                       }),                 
                     })
 
-                    // const data = result.json();
-                    console.log(result);
+                    const data = await result.json();
+                    console.log(data);
+                    const playlistID = data.id;
+                    const songUri = parseSongs();
+
+                    var addSongsUrl = `${'https://api.spotify.com/v1/playlists/'}${playlistID}${'/'}`
+
+                    const result2 = await fetch(addSongsUrl + songUri, {
+                    method: 'POST',
+                    headers: { 'Authorization' : 'Bearer ' + window.privPlaylistToken},                
+                    })
+
+                    const data2 = await result2.json();
                 },
                 (e) => {
                   console.error(e); 
@@ -107,7 +130,7 @@ function Login() {
     }
 
     if (songs.length >= 10) {
-        // createPlaylist()
+        createPlaylist()
     }
 
     return (
