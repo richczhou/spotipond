@@ -4,10 +4,11 @@ import * as THREE from "three"
 import { useLocation } from "wouter";
 
 import LandModel from "./pond/LandModel";
-// import TreeModel from "./pond/TreeModel";
+import TreeModel from "./pond/TreeModel";
 import WaterModel from "./pond/WaterModel";
 import LeavesModel from "./pond/LeavesModel";
 import GrassModel from "./pond/GrassModel";
+import { OrbitControls } from "@react-three/drei";
 
 function PondLayout() {
     const cubeRef = useRef();
@@ -22,6 +23,8 @@ function PondLayout() {
     });
 
     return (
+        <>
+        <OrbitControls enablePan={true} enableZoom={true} enableRotate={true} />
         <group 
             position={[0, 0, 0]}> 
 
@@ -36,12 +39,13 @@ function PondLayout() {
                 geometry={geometry}>
             </mesh> */}
             <LandModel />
-            {/* <TreeModel /> */}
+            <TreeModel />
             <WaterModel />
             <LeavesModel />
             <GrassModel />
             
         </group> 
+        </>
     );
 }
 

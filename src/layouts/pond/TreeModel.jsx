@@ -27,21 +27,9 @@ function TreeModel() {
                     itemSize={2}
                 />
                 <bufferAttribute
-                    attach='attributes-uv2'
-                    array={new Float32Array(tree.data.attributes.uv2.array)}
-                    count={tree.data.attributes.uv2.array.length / 3}
-                    itemSize={2}
-                />
-                <bufferAttribute
                     attach='attributes-normal'
                     array={new Float32Array(tree.data.attributes.normal.array)}
                     count={tree.data.attributes.normal.array.length / 3}
-                    itemSize={3}
-                />
-                <bufferAttribute
-                    attach='attributes-vdata'
-                    array={new Float32Array(tree.data.attributes.vdata.array)}
-                    count={tree.data.attributes.vdata.array.length / 3}
                     itemSize={3}
                 />
                 <bufferAttribute
