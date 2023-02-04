@@ -22,6 +22,7 @@ function PondLayout() {
             <mesh
                 ref={cubeRef}
                 onClick={(e) => {
+                    console.log('clicked')
                     e.stopPropagation()
                     setLocation('/login')
                 }}

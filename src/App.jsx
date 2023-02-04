@@ -5,22 +5,19 @@ import { Canvas } from "@react-three/fiber";
 import { useLocation, Switch, Route } from "wouter"
 
 import './App.css'
-import PondLayout from './PondLayout'
-import LoginPage from './LoginPage'
-import GalleryLayout from './GalleryLayout'
+import LoginPage from './scenes/LoginPage';
+import MainPage from './scenes/MainPage';
 
 function App() {
   const [location] = useLocation()
 
   return (
     <div className="App">
-      <Canvas className="main-canvas" camera={{fov: 50, position:[-0.5, 1.5, 1.5]}} >
         <Switch location={location}>
-          <Route path="/" component={PondLayout} />
-          <Route path="/login" component={GalleryLayout} />
+          <Route path="/" component={LoginPage} />
+          <Route path="/login" component={MainPage} />
         </Switch>
         {/* <GalleryLayout /> */}
-      </Canvas>
     </div>
   )
 }
