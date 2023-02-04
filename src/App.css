@@ -118,6 +118,18 @@ iframe {
   --pond-aqua: #72AEFB;
 }
 
+@font-face {
+  font-family: "Circular";
+  src: url("/fonts/Circular-Bold.ttf") format('truetype');
+  font-weight: 500;
+  /* font-display: swap; */
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("/fonts/Roboto-Regular.ttf") format('truetype');
+  font-weight: 300;
+  /* font-display: swap; */
+}
 
 .h0, h1, h2, h3 {
   font-family: "Circular Bold", sans-serif;
