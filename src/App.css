@@ -3,6 +3,57 @@
   height: 100%;
 }
 
-h1, h2, h3, p {
+.overlay {
   position: absolute;
+}
+
+:root {
+  /* SPOTIFY BRAND COLORS */
+  --spotify-white: #FFFFFF;
+  --spotify-light: #F0F0F0;
+  --spotify-grey: #535353;
+  --spotify-dark: #191414;
+  --spotify-green: #1DB954;
+
+  /* OUR OWN COLORS */
+  --pond-white: #F4FAFF;
+  --pond-green: #74A987;
+  --pond-blue: #2A587B;
+
+  --pond-yellow: #DFDF79;
+  --pond-sky: #A0D6FD;
+  --pond-aqua: #72AEFB;
+}
+
+
+.h0, h1, h2, h3 {
+  font-family: "Circular Bold", sans-serif;
+}
+
+p {
+  font-family: "Roboto", sans-serif;
+}
+
+.h0 {
+  font-size: 8em;
+}
+
+h1 {
+  font-size: 4.5em;
+}
+
+h2 {
+  font-size: 2.25em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+h4 {
+  font-size: 1em;
+}
+
+p {
+  font-size: 0.875em;
 }
