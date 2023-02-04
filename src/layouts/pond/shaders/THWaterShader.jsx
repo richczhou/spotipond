@@ -9,7 +9,7 @@ export const useTHWaterMaterial = ( color ) => {
       new ShaderMaterial({
         uniforms: {
           tMap: new Uniform(new THREE.TextureLoader().load( "tex/th_land.jpg" )),
-          tMatcap: new Uniform(new THREE.TextureLoader().load( "tex/th_land.jpg" )),
+          tMatcap: new Uniform(new THREE.TextureLoader().load( "tex/matcap1.jpg" )),
           uColor1: new Uniform(new THREE.Color("#4A94A6")),
           uColor2: new Uniform(new THREE.Color("#1A96B5")),
           uFresnelColor: new Uniform(new THREE.Color("#1A96B5")),
@@ -128,7 +128,7 @@ const vert = `
         float noise = cnoise(pos.xyz * 0.3 + uTime * 0.05);
         float noise2 = cnoise(pos.xyz * 1.7 + uTime * 1.1);
 
-        pos += noise * vec3(0.05,0.1,0.05);
+        pos += noise * vec3(0.1,0.15,0.15);
         pos += noise2 * 0.01;
 
         
@@ -138,7 +138,7 @@ const vert = `
         vec3 nearby2 = pos + tangent2 * 0.3;
         vec3 distorted1 = nearby1 + noise *  vec3(0.05,0.1,0.05) + noise2 * 0.01;
         vec3 distorted2 = nearby2 + noise *  vec3(0.05,0.1,0.05) + noise2 * 0.01;
-        vNormal = normalize(cross(distorted1 - pos, distorted2 - pos)) * normalize(normalMatrix * normal);;
+        vNormal = normalize(cross(distorted1 - pos, distorted2 - pos));
         //vNormal = normalize(normalMatrix * normal);
         vData = vdata;
 
@@ -232,16 +232,15 @@ const frag = `
       st = rotateUV(st, uTime * 0.02, vec2(0.0,0.0));
 
       vec4 matCap = texture2D(tMatcap, st);
-      matCap.rgb = pow(matCap.rgb, vec3(1.2));
-      matCap.r = crange(matCap.r, 0.1, 1.0, 0.0, 1.1);
+      matCap.rgb = pow(matCap.rgb, vec3(1.4));
       
       vec3 color = mix(uColor1, uColor2, vData.r);
 
-      color.rgb += vec3(matCap.r) * 1.0;
+      //color.rgb += vec3(matCap.r) * 1.7;
 
       float fresnel = getFresnel(vNormal, vViewDir, 0.5);
       fresnel = smoothstep(0.0, 1.0, fresnel);
-      //color.rgb += fresnel * uFresnelColor * 0.4;
+      color.rgb = mix(color.rgb, vec3(0.2, 0.6, 0.6), fresnel);
 
       float op = crange(vData.r, 0.0, 1.0, 0.0, 0.7);
 

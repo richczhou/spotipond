@@ -7,9 +7,14 @@ import LandModel from "./pond/models/LandModel";
 import TreeModel from "./pond/models/TreeModel";
 import WaterModel from "./pond/models/WaterModel";
 import LeavesModel from "./pond/models/LeavesModel";
+import HedgeModel from "./pond/models/HedgeModel";
 import GrassModel from "./pond/models/GrassModel";
 import RockModel from "./pond/models/RockModel";
 import SphereModel from "./pond/models/SphereModel";
+import PlantModel from "./pond/models/PlantModel";
+import EDMFishModel from "./pond/models/EDMFishModel";
+import BoneFishModel from "./pond/models/BoneFishModel";
+import DancingFishModel from "./pond/models/DancingFishModel";
 import { OrbitControls } from "@react-three/drei";
 
 function PondLayout() {
@@ -44,9 +49,14 @@ function PondLayout() {
             <TreeModel />
             <WaterModel />
             <LeavesModel />
+            <HedgeModel />
             <GrassModel />
+            <PlantModel />
             <RockModel />
             <SphereModel />
+            <EDMFishModel />
+            <BoneFishModel />
+            <DancingFishModel />
             
         </group> 
         </>
