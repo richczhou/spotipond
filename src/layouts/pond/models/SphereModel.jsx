@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import * as THREE from "three";
 
-import sphere from '../../geo/th_backsphere.json'
-import { useTHSphereMaterial } from "./THSphereShader";
+import sphere from '../../../geo/th_backsphere.json'
+import { useTHSphereMaterial } from "./../shaders/THSphereShader";
 
 function SphereModel() {
     const sphereRef = useRef();

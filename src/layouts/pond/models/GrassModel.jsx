@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import * as THREE from "three";
 
-import grass from '../../geo/th_land_grss.json'
-import { useTHBushMaterial } from "./THBushShader";
+import grass from '../../../geo/th_land_grss.json'
+import { useTHBushMaterial } from "../shaders/THBushShader";
 
 function GrassModel() {
     const grassRef = useRef();

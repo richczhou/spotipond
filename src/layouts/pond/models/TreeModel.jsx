@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import * as THREE from "three";
 
-import tree from '../../geo/th_tree.json'
-import { useTHTreeMaterial } from "./THTreeShader";
+import tree from '../../../geo/th_tree.json'
+import { useTHTreeMaterial } from "./../shaders/THTreeShader";
 
 function TreeModel() {
     const treeRef = useRef();

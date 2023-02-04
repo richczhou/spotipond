@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import * as THREE from "three";
 
-import water from '../../geo/th_water.json'
-import { useTHWaterMaterial } from "./THWaterShader";
+import water from '../../../geo/th_water.json'
+import { useTHWaterMaterial } from "./../shaders/THWaterShader";
 
 function WaterModel() {
     const waterRef = useRef();

@@ -1,8 +1,8 @@
 import { useRef } from "react";
 import * as THREE from "three";
 
-import rock from '../../geo/th_rock.json'
-import { useTHRockMaterial } from "./THRockShader";
+import rock from '../../../geo/th_rock.json'
+import { useTHRockMaterial } from "./../shaders/THRockShader";
 
 function RockModel() {
     const rockRef = useRef();

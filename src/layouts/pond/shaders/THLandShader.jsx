@@ -4,12 +4,14 @@ import { useMemo } from 'react'
 import { useFrame } from '@react-three/fiber'
 
 export const useTHLandMaterial = ( color ) => {
+  const op_tex = new THREE.TextureLoader().load( "tex/circlemask_thres.png" );
+  // console.log(op_tex);
   const mat = useMemo(
     () =>
       new ShaderMaterial({
         uniforms: {
           tMap: new Uniform(new THREE.TextureLoader().load( "tex/th_land.jpg" )),
-          tOp: new Uniform(new THREE.TextureLoader().load( "tex/circlemask_thres.png" )),
+          tOp: new Uniform(op_tex),
           uFresnelColor: new Uniform(new THREE.Color("#1A96B5")),
           uTime: new Uniform(0)
         },
@@ -143,7 +145,7 @@ const frag = `
       vec2 spinuv = rotateUV(vUv, posterizeTime, vec2(0.5, 0.5));
       float op = texture2D(tOp, spinuv).r;
 
-      op = crange(op, 0.1, 1.0, 0.0, 1.0);
+      op = crange(op, 0.1, 0.99, 0.0, 1.0);
       vec3 color = texture2D(tMap, vUv).rgb;
       float fresnel = getFresnel(vNormal, vViewDir, 0.5);
       fresnel = smoothstep(0.0, 1.0, fresnel);
@@ -151,5 +153,6 @@ const frag = `
       color.rgb = mix(color.rgb, uFresnelColor, fresnel * 0.5);
 
       gl_FragColor = vec4(color, op);
+      // gl_FragColor = vec4(vec3(op), 1);
     }
     `
